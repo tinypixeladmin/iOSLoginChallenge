@@ -7,6 +7,7 @@
 //
 
 #import "TPXViewController.h"
+#import "TPXCreateAccountViewController.h"
 
 @interface TPXViewController ()
 
@@ -14,10 +15,10 @@
 
 @implementation TPXViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.userNameLbl.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
+    self.passwordLbl.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_PASSWORD];
 }
 
 - (void)didReceiveMemoryWarning
