@@ -32,14 +32,46 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.destinationViewController isKindOfClass:[TPXCreateAccountViewController class]]){
+        TPXCreateAccountViewController *createAccountVC = segue.destinationViewController;
+        
+        createAccountVC.delegate = self;
+        
+    }
+}
+
 - (IBAction)logingBtnPressed:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"toVCSegue" sender:sender];
+    NSString *userName = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
+    NSString *pword = [[NSUserDefaults standardUserDefaults] objectForKey:USER_PASSWORD];
+    
+    if([self.usernameTF.text isEqualToString:userName] &&
+       [self.passwordTF.text isEqualToString:pword]){
+        
+        [self performSegueWithIdentifier:@"toVCSegue" sender:sender];
+        
+    } else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username or password combination does not work" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+        
+    }
+    
+    
+    
 }
 
 - (IBAction)createAccountBtnPressed:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"toCreateAccountVCSegue" sender:sender];
-    
-    
 }
+
+#pragma mark - TPXCreateAccountViewController Delegate
+-(void) didCancel{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) didCreatAccount{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

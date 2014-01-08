@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TPXCreateAccountViewController.h"
 
-@interface TPXSignInViewController : UIViewController
+@interface TPXSignInViewController : UIViewController <TPXCreateAccountViewControllerDelegate>
+
 @property (strong, nonatomic) IBOutlet UITextField *usernameTF;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTF;
 

@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -33,9 +34,28 @@
 }
 
 - (IBAction)cancelBtnPressed:(UIButton *)sender {
-    [self.delegate cancel];
+    [self.delegate didCancel];
 }
 
 - (IBAction)createAccontBtnPressed:(UIButton *)sender {
+    if((self.usernameTF.text.length != 0) &&
+       (self.passwordTF.text.length != 0) &&
+       [self.passwordTF.text isEqualToString:self.confirmPasswordTF.text]){
+    
+        [[NSUserDefaults standardUserDefaults] setObject:self.usernameTF.text forKey:USER_NAME];
+        [[NSUserDefaults standardUserDefaults] setObject:self.passwordTF.text forKey:USER_PASSWORD];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Information Not Entered Correctly" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [av show];
+        
+        
+    }
+    
+    
+    
+    
+    [self.delegate didCreatAccount];
 }
 @end
